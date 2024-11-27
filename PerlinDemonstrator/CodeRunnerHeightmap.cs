@@ -8,7 +8,16 @@ namespace PerlinDemonstrator
 {
     internal class CodeRunnerHeightmap : CodeRunner<float[,]>
     {
-        public override string SetupCode { get; set; } = $"using PerlinDemonstrator;\nusing PerlinDemonstrator.JavaImports;\n\nfloat[,] data = new float[{DisplayWidth}, {DisplayWidth}];\nRandom rand = new(DateTime.Now.Ticks);";
+        public override string SetupCode { get; set; } = $"""
+                                                          using PerlinDemonstrator.JavaImports;
+                                                          using PerlinDemonstrator.Noise;
+                                                          
+                                                          const int WIDTH = {DisplayWidth};
+                                                          const long SEED = {DateTime.Now.Ticks};
+
+                                                          float[,] data = new float[WIDTH, WIDTH];
+                                                          Random rand = new(SEED);
+                                                          """;
         public override string LogFile { get; set; } = "last.txt";
         public override string EndCode { get; set; } = "return data;";
 
